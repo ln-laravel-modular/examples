@@ -81,27 +81,28 @@ class ExamplesController extends \App\Http\Controllers\Controller
     {
         $return = [
             'view' => "examples::examples.index",
-            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\examples')),
+            // 'examples' => app('files')->directories('modules\\' . Module::currentConfig('packages.name') . '\\' . config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages.slug')),
+            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages'))),
         ];
         return self::view($return['view'], $return);
     }
     public function view_examples(Request $request, $path)
     {
         $return = [
-            'view' => "examples::examples.index",
-            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\examples')),
+            'view' => "examples::example-packages.index",
+            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages'))),
             'path' => $path,
             'slug' => explode('/', $path)[0]
         ];
-        $return['template_view'] = $template_view = module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path'))  . '\\examples' . '\\' . $path;
-        // var_dump(app('files')->exists($template_view));
-        // var_dump($template_view);
-        if (app('files')->isDirectory($template_view) && app('files')->isFile($template_view . '\\index.blade.php')) {
+        $return['example_view'] = $example_view = module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages')) . '\\' . $path;
+        // var_dump(app('files')->exists($example_view));
+        // var_dump($example_view);
+        if (app('files')->isDirectory($example_view) && app('files')->isFile($example_view . '\\index.blade.php')) {
             $return['isDirectory'] = true;
-            $return['view'] = "examples::examples." . str_replace(["/"], ["."], $path) . ".index";
-        } else if (app('files')->isFile($template_view . '.blade.php')) {
+            $return['view'] = "examples::example-packages." . str_replace(["/"], ["."], $path) . ".index";
+        } else if (app('files')->isFile($example_view . '.blade.php')) {
             $return['isFile'] = true;
-            $return['view'] = "examples::examples." . str_replace(["/"], ["."], $path);
+            $return['view'] = "examples::example-packages." . str_replace(["/"], ["."], $path);
         } else {
             abort(404);
         }

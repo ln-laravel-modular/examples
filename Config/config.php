@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'name' => 'Examples'
+    'name' => 'Examples',
+    'packages' => 'example-packages'
 ];
