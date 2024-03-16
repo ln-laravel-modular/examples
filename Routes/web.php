@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Nwidart\Modules\Laravel\Module;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +12,11 @@ use Nwidart\Modules\Laravel\Module;
 |
 */
 
-
-Route::prefix(Module::currentConfig('slug'))->group(function () {
-    Route::get('/', 'TemplatesController@view_index');
+Route::prefix('examples')->group(function () {
+    Route::get('/', 'ExamplesController@view_index');
     // Route::get('/', function (Request $request) {
-    //     $templates = app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\templates'));
-    //     var_dump($templates);
+    //     $examples = app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\examples'));
+    //     var_dump($examples);
     // });
-    Route::get('/{path}', 'TemplatesController@view_templates')->where(['path' => '.*']);
+    Route::get('/{path}', 'ExamplesController@view_examples')->where(['path' => '.*']);
 });

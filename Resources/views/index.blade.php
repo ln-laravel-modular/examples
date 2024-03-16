@@ -1,9 +1,9 @@
-@extends('templates::layouts.master')
+@extends('examples::layouts.master')
 
 @section('content')
     <h1>Hello World</h1>
 
     <p>
-        This view is loaded from module: {!! config('templates.name') !!}
+        This view is loaded from module: {!! config('examples.name') !!}
     </p>
 @endsection

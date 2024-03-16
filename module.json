@@ -1,11 +1,11 @@
 {
-    "name": "Templates",
-    "alias": "templates",
+    "name": "Examples",
+    "alias": "examples",
     "description": "",
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Templates\\Providers\\TemplatesServiceProvider"
+        "Modules\\Examples\\Providers\\ExamplesServiceProvider"
     ],
     "aliases": {},
     "files": [],

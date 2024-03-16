@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Templates\Http\Controllers;
+namespace Modules\Examples\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Nwidart\Modules\Laravel\Module;
 
-class TemplatesController extends \App\Http\Controllers\Controller
+class ExamplesController extends \App\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class TemplatesController extends \App\Http\Controllers\Controller
      */
     public function index()
     {
-        return view('templates::index');
+        return view('examples::index');
     }
 
     /**
@@ -24,7 +24,7 @@ class TemplatesController extends \App\Http\Controllers\Controller
      */
     public function create()
     {
-        return view('templates::create');
+        return view('examples::create');
     }
 
     /**
@@ -44,7 +44,7 @@ class TemplatesController extends \App\Http\Controllers\Controller
      */
     public function show($id)
     {
-        return view('templates::show');
+        return view('examples::show');
     }
 
     /**
@@ -54,7 +54,7 @@ class TemplatesController extends \App\Http\Controllers\Controller
      */
     public function edit($id)
     {
-        return view('templates::edit');
+        return view('examples::edit');
     }
 
     /**
@@ -77,32 +77,31 @@ class TemplatesController extends \App\Http\Controllers\Controller
     {
         //
     }
-
     public function view_index(Request $request)
     {
         $return = [
-            'view' => "templates::templates.index",
-            'templates' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\templates')),
+            'view' => "examples::examples.index",
+            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\examples')),
         ];
         return self::view($return['view'], $return);
     }
-    public function view_templates(Request $request, $path)
+    public function view_examples(Request $request, $path)
     {
         $return = [
-            'view' => "templates::templates.index",
-            'templates' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\templates')),
+            'view' => "examples::examples.index",
+            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\examples')),
             'path' => $path,
             'slug' => explode('/', $path)[0]
         ];
-        $return['template_view'] = $template_view = module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path'))  . '\\templates' . '\\' . $path;
+        $return['template_view'] = $template_view = module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path'))  . '\\examples' . '\\' . $path;
         // var_dump(app('files')->exists($template_view));
         // var_dump($template_view);
         if (app('files')->isDirectory($template_view) && app('files')->isFile($template_view . '\\index.blade.php')) {
             $return['isDirectory'] = true;
-            $return['view'] = "templates::templates." . str_replace(["/"], ["."], $path) . ".index";
+            $return['view'] = "examples::examples." . str_replace(["/"], ["."], $path) . ".index";
         } else if (app('files')->isFile($template_view . '.blade.php')) {
             $return['isFile'] = true;
-            $return['view'] = "templates::templates." . str_replace(["/"], ["."], $path);
+            $return['view'] = "examples::examples." . str_replace(["/"], ["."], $path);
         } else {
             abort(404);
         }

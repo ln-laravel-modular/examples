@@ -4,16 +4,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Module Templates</title>
+        <title>Module Examples</title>
 
        {{-- Laravel Mix - CSS File --}}
-       {{-- <link rel="stylesheet" href="{{ mix('css/templates.css') }}"> --}}
+       {{-- <link rel="stylesheet" href="{{ mix('css/examples.css') }}"> --}}
 
     </head>
     <body>
         @yield('content')
 
         {{-- Laravel Mix - JS File --}}
-        {{-- <script src="{{ mix('js/templates.js') }}"></script> --}}
+        {{-- <script src="{{ mix('js/examples.js') }}"></script> --}}
     </body>
 </html>

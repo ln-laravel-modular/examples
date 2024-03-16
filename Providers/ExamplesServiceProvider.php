@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\Templates\Providers;
+namespace Modules\Examples\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class TemplatesServiceProvider extends ServiceProvider
+class ExamplesServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Templates';
+    protected $moduleName = 'Examples';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'templates';
+    protected $moduleNameLower = 'examples';
 
     /**
      * Boot the application events.
