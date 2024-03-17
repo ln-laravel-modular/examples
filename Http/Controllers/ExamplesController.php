@@ -5,7 +5,7 @@ namespace Modules\Examples\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Nwidart\Modules\Laravel\Module;
+use Modules\Core\Support\Module;
 
 class ExamplesController extends \App\Http\Controllers\Controller
 {
