@@ -82,7 +82,7 @@ class ExamplesController extends \App\Http\Controllers\Controller
         $return = [
             'view' => "examples::examples.index",
             // 'examples' => app('files')->directories('modules\\' . Module::currentConfig('packages.name') . '\\' . config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages.slug')),
-            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages'))),
+            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . DIRECTORY_SEPARATOR . Module::currentConfig('packages'))),
         ];
         return self::view($return['view'], $return);
     }
@@ -90,19 +90,19 @@ class ExamplesController extends \App\Http\Controllers\Controller
     {
         $return = [
             'view' => "examples::example-packages.index",
-            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages'))),
+            'examples' => app('files')->directories(module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . DIRECTORY_SEPARATOR . Module::currentConfig('packages'))),
             'path' => $path,
             'slug' => explode('/', $path)[0]
         ];
-        $return['example_view'] = $example_view = module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . '\\' . Module::currentConfig('packages')) . '\\' . $path;
+        $return['example_view'] = $example_view = module_path(Module::currentConfig('name'), config('modules.paths.generator.views.path') . DIRECTORY_SEPARATOR . Module::currentConfig('packages')) . DIRECTORY_SEPARATOR . $path;
         // var_dump(app('files')->exists($example_view));
         // var_dump($example_view);
-        if (app('files')->isDirectory($example_view) && app('files')->isFile($example_view . '\\index.blade.php')) {
+        if (app('files')->isDirectory($example_view) && app('files')->isFile($example_view . DIRECTORY_SEPARATOR . 'index.blade.php')) {
             $return['isDirectory'] = true;
-            $return['view'] = "examples::example-packages." . str_replace(["/"], ["."], $path) . ".index";
+            $return['view'] = "examples::example-packages." . str_replace([DIRECTORY_SEPARATOR], ["."], $path) . ".index";
         } else if (app('files')->isFile($example_view . '.blade.php')) {
             $return['isFile'] = true;
-            $return['view'] = "examples::example-packages." . str_replace(["/"], ["."], $path);
+            $return['view'] = "examples::example-packages." . str_replace([DIRECTORY_SEPARATOR], ["."], $path);
         } else {
             abort(404);
         }
